@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery | BIUST Innovation Club</title>
+<link rel="stylesheet" href="web gallery.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="BIUST Innovation Club home">
+    <img class="logo" src="logo.jpg" alt="BIUST Innovation Club logo">
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#top" id="navGallery" class="active">Gallery</a>
+    <a href="#about">About us</a>
+    <a href="#top" id="navEvents">Events</a>
+  </nav>
+  <button class="btn outline" id="addBtn" type="button">Add photo <span aria-hidden="true">&#8599;</span></button>
+</header>
+
+<main id="top" class="page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">The student project gallery</p>
+      <h1>Big ideas. Built here.</h1>
+      <p class="lede">A collection of workshops, hackathons, prototypes and competitions. Explore what BIUST's student makers are bringing to life.</p>
+    </div>
+  </section>
+
+  <section class="toolbar" aria-label="Gallery controls">
+    <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+    <input type="search" id="search" placeholder="Search by event name" aria-label="Search by event name">
+  </section>
+  <div class="subbar"><span id="stats" aria-live="polite"></span><span class="tagline">A little curiosity goes a long way</span></div>
+
+  <section class="grid" id="grid" aria-live="polite"></section>
+  <p class="empty" id="empty" hidden>No photos match. Try another category or search term, or add a new photo.</p>
+</main>
+
+<footer class="site-footer" id="about">
+  <div>
+    <strong>BIUST Innovation Club</strong>
+    <p>&copy; <span id="year"></span> Botswana International University of Science and Technology. Built by curious minds. Photos are stored only in this browser and work offline.</p>
+  </div>
+  <div class="foot-links">
+    <button type="button" id="exportBtn">Export backup &#8599;</button>
+    <button type="button" id="importBtn">Import backup &#8599;</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+  </div>
+</footer>
+
+<!-- Add / edit dialog -->
+<dialog id="formDialog">
+  <form id="photoForm" novalidate>
+    <h2 id="formTitle">Add photo</h2>
+    <div class="file-field" id="fileField">
+      <label for="file">Image (JPG, PNG, WebP or GIF, max 8 MB)</label>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp,image/gif">
+    </div>
+    <img id="preview" alt="Preview of selected image" hidden>
+    <label for="name">Event or activity name</label>
+    <input id="name" maxlength="80" required>
+    <div class="row">
+      <div><label for="date">Date</label><input type="date" id="date" required></div>
+      <div><label for="category">Category</label>
+        <select id="category" required></select></div>
+    </div>
+    <label for="desc">Description</label>
+    <textarea id="desc" rows="3" maxlength="400"></textarea>
+    <p class="error" id="formError" role="alert" hidden></p>
+    <div class="actions">
+      <button type="button" class="btn" id="cancelBtn">Cancel</button>
+      <button type="submit" class="btn primary" id="saveBtn">Save photo</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Lightbox -->
+<dialog id="lightbox" aria-label="Photo viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close viewer">&times;</button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+  <figure>
+    <img id="lbImg" alt="">
+    <figcaption>
+      <h3 id="lbTitle"></h3>
+      <p class="meta" id="lbMeta"></p>
+      <p id="lbDesc"></p>
+      <div class="actions left">
+        <button class="btn" id="lbEdit" type="button">Edit details</button>
+        <button class="btn danger" id="lbDelete" type="button">Delete photo</button>
+      </div>
+    </figcaption>
+  </figure>
+  <button class="lb-nav next" id="lbNext" aria-label="Next photo">&#8250;</button>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="web gallery.js"></script>
+</body>
+</html>
