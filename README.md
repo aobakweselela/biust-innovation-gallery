@@ -54,3 +54,18 @@ We'll look at:
 * How well you can explain your implementation
 
 **Keep it simple. Have fun building it.**
+## Live Demo
+
+https://YOUR-LIVE-URL.vercel.app
+
+(Deployed on Vercel from github.com/aobakweselela/biust-innovation-gallery, a copy of this repo, because Vercel needed organisation-owner approval for the private repo.)
+
+## How I approached it
+
+- **Storage:** Images are saved as Blobs in IndexedDB together with their details (name, date, category, description). I chose IndexedDB over localStorage because localStorage only holds text and is limited to about 5 MB, so images would have to be converted to base64 and would take more space.
+- **Flow:** On load the app reads everything from IndexedDB, then renders the gallery. Every action (upload, edit, delete, filter, search) updates the data and calls the same render function.
+- **Save order:** The app writes to the database first and only then updates the screen, so the page never shows something that wasn't actually stored.
+- **Error handling:** It checks the file type, rejects files over 8 MB, checks the image can be decoded, and shows a clear message if saving fails or storage is full.
+- **Security:** User text is shown with textContent so it can't inject HTML.
+- **Limits:** Photos stay in one browser on one device, and clearing site data removes them. I added export and import (a JSON backup) to work around this.
+- **Next steps:** Resize large photos automatically, and add drag-and-drop and multi-upload.
